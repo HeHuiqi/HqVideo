@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>上传文件</title>
+</head>
+<body>
+<div>
+    <form id="video_upload" enctype="multipart/form-data"  method="post">
+        <input type="file" name="file">
+        <input type="submit" value="upload file">
+    </form>
+</div>
+<script >
+
+    (function () {
+        var form = document.getElementById("video_upload")
+        var date = new Date()
+        console.log(date);
+        var fileName = date.getTime()+".mp4";
+        console.log(fileName);
+        form.setAttribute("action","http://127.0.0.1:9000/upload/"+fileName)
+
+    })();
+</script>
+</body>
+</html>

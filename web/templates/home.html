@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+    {{/*注意这里的路径在main.go中配置的虚拟路径*/}}
+    <script src="static/js/home.js"></script>
+</head>
+<body>
+<div>
+    <h1>{{.Title}}</h1>
+    <script>
+        showAllVideo();
+    </script>
+</div>
+</body>
+</html>
