@@ -8,6 +8,7 @@ import (
 	"fmt"
 	"log"
 	"HqVideo/api/auth"
+	"strings"
 )
 
 type middleWareHandler struct {
@@ -22,8 +23,18 @@ func NewMiddleWareHandler(r *httprouter.Router) http.Handler  {
 func (m middleWareHandler) ServeHTTP(w http.ResponseWriter,r *http.Request)  {
 
 	//在这里检测session的合法是否过期等
-	auth.ValidateUserSession(r)
-	m.r.ServeHTTP(w,r)
+	isHave := auth.ValidateUserSession(r)
+	isStaticFile := strings.HasPrefix(r.URL.Path,"/static")
+	if isHave || r.URL.Path == "/" || isStaticFile{
+		m.r.ServeHTTP(w,r)
+	}else {
+		http.Redirect(w,r,"/",http.StatusFound)
+	}
+
+	//m.r.ServeHTTP(w,r)
+
+
+
 }
 //注册处理器
 func RegisterHandlers() *httprouter.Router  {
