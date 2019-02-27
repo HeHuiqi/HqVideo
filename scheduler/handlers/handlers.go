@@ -25,5 +25,10 @@ func VideoDeleteRecordHandler(w http.ResponseWriter,r *http.Request, p httproute
 	response.SendResponse(w,200,"delete file successful")
 
 
+}
+
+func VideoSchedulerIndex(w http.ResponseWriter, r *http.Request, p httprouter.Params)  {
+
+	response.SendResponse(w,200,"自动化任务,有客户端或管理后端调用")
 
 }

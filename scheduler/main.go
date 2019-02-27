@@ -12,6 +12,7 @@ func RegisterHandlers() *httprouter.Router  {
 
 	router := httprouter.New()
 	router.GET("/video-delete-record/:vid-id",handlers.VideoDeleteRecordHandler)
+	router.GET("/",handlers.VideoSchedulerIndex)
 	return router
 }
 func main() {

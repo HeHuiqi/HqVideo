@@ -24,6 +24,7 @@ type UserPage struct {
 func HomeHandler(w http.ResponseWriter,r *http.Request,p httprouter.Params)  {
 
 
+
 	cname , err1 := r.Cookie("username")
 	sid,err2 := r.Cookie("session")
 	fmt.Println("canme--",cname,"sid",sid)
@@ -53,6 +54,7 @@ func UserHomeHandler(w http.ResponseWriter,r *http.Request,p httprouter.Params) 
 	_,err2 := r.Cookie("session")
 
 	if err1 != nil || err2 != nil {
+		//用户未登录重定向到首页
 		http.Redirect(w,r,"/",http.StatusFound)
 		return
 
