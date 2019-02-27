@@ -3,25 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <title>上传文件</title>
+    <style type="text/css">
+        #video_upload{
+            position:relative;
+            width:340px;
+            margin:20px;
+        }
+        .fileName{
+            height:28px;
+            line-height:28px;
+            border:1px solid #cdcdcd;
+            width:180px;
+        }
+        .btn{
+            width:70px;
+            color:#fff;background-color:#3598dc;
+            border:0 none;height:28px;
+            line-height:16px!important;
+            cursor:pointer;
+        }
+        .btn:hover{
+            background-color:#63bfff;
+            color:#fff;}
+        .file{
+            position:absolute;
+            top:0;
+            right:85px;
+            height:30px;
+            line-height:30px;
+            filter:alpha(opacity:0);
+            opacity: 0;
+            width:254px
+        }
+    </style>
 </head>
 <body>
 <div>
     <form id="video_upload" enctype="multipart/form-data"  method="post">
-        <input type="file" name="file">
-        <input type="submit" value="upload file">
+        <input type="text" id="showFileName" class="fileName" />
+        <input type="button" class="btn" value="浏览..." />
+        <input type="file" name="file" class="file" id="fileField" onchange="fileChange(this)"/>
+        <input type="submit" class="btn" value="上传" />
     </form>
 </div>
 <script >
 
-    (function () {
-        var form = document.getElementById("video_upload")
-        var date = new Date()
-        console.log(date);
-        var fileName = date.getTime()+".mp4";
-        console.log(fileName);
-        form.setAttribute("action","http://127.0.0.1:9000/upload/"+fileName)
+    function fileChange(myfrom) {
 
-    })();
+        var fileName = myfrom.files[0].name;
+        document.getElementById('showFileName').value=fileName;
+
+
+        var form = document.getElementById("video_upload");
+
+        var date = new Date();
+        var filePrefix = date.getTime()+"_";
+
+        if (fileName.length >0 ){
+            var upload_file = filePrefix + fileName;
+            console.log("upload_file=="+upload_file);
+            form.setAttribute("action","http://127.0.0.1:9000/upload/"+upload_file);
+        }
+
+    }
 </script>
 </body>
 </html>

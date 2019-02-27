@@ -21,10 +21,10 @@ func StreamHandler(w http.ResponseWriter,r *http.Request, p httprouter.Params)  
 	video,err := os.Open(vl)
 
 	if err != nil {
-		response.SendErrorResponse(w,http.StatusInternalServerError,"Internal error")
+		response.SendErrorResponse(w,http.StatusInternalServerError,"Internal error,file not exist!")
 		return
 	}
-	w.Header().Set("Content-Type", "video/mp4")
+	//w.Header().Set("Content-Type", "video/mp4")
 
 	//把文件返回到client
 	http.ServeContent(w,r,"",time.Now(),video)
